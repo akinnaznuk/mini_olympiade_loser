@@ -14,6 +14,24 @@
       margin: 0 auto;
     }
     h1 { color: #ff79c6; }
+    p { line-height: 1.5; font-size: 16px; }
+    
+    /* Container für die verschiedenen Bildschirme */
+    #welcome-screen, #riddle-screen {
+      background: #44475a;
+      padding: 30px;
+      border-radius: 8px;
+      border: 1px solid #6272a4;
+    }
+    
+    /* Das Rätsel ist am Anfang versteckt */
+    #riddle-screen {
+      display: none;
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+
     .question-box {
       background: #44475a;
       padding: 20px;
@@ -52,57 +70,72 @@
       padding: 20px;
       border-radius: 8px;
     }
-    a { color: #282a36; font-weight: bold; }
+    a { color: #282a36; font-weight: bold; text-decoration: none; border-bottom: 2px solid #282a36; }
   </style>
 </head>
 <body>
 
-  <h1>🔒 DATE_UNLOCKER_V1.0 🔒</h1>
-  <p>System gesperrt. Bitte löse die Sicherheitsprotokolle, um die Zielkoordinaten für unser Date zu extrahieren.</p>
-
-  <div class="question-box">
-    <p><strong>Protokoll 1:</strong><br>Ich bestehe aus Erde und Wasser, aber erst das Feuer macht mich hart. Was bin ich?</p>
-    <input type="text" id="q1" placeholder="Passwort 1 eingeben...">
+  <!-- STARTBILSCHIRM -->
+  <div id="welcome-screen">
+    <h1>Hoi! 👋</h1>
+    <p>willkomme uf dim überraschigs-date.</p>
+    <p>du hesch der ja öppis gwünscht wo mer beid na nie gmacht hend. was das wird si musch du aber zerscht usefinde und eus denn det herefüehre.</p>
+    <p>viel erfolg!</p>
+    <button onclick="startMission()">Rätsel starten 🚀</button>
   </div>
 
-  <div class="question-box">
-    <p><strong>Protokoll 2:</strong><br>Ich drehe mich endlos im Kreis, während deine Hände mich formen. Was bin ich?</p>
-    <input type="text" id="q2" placeholder="Passwort 2 eingeben...">
-  </div>
+  <!-- RÄTSELBILDSCHIRM -->
+  <div id="riddle-screen">
+    <h1>🔒 DATE_UNLOCKER_V1.0 🔒</h1>
+    <p>System gesperrt. Bitte löse die Sicherheitsprotokolle, um die Zielkoordinaten für unser Date zu extrahieren.</p>
 
-  <div class="question-box">
-    <p><strong>Protokoll 3:</strong><br>[Hier kannst du eine Insider-Frage über euch einfügen, z.B.: Was war das erste Getränk, das wir zusammen getrunken haben?]</p>
-    <input type="text" id="q3" placeholder="Passwort 3 eingeben...">
-  </div>
+    <div class="question-box">
+      <p><strong>Protokoll 1:</strong><br>Ich bestehe aus Erde und Wasser, aber erst das Feuer macht mich hart. Was bin ich?</p>
+      <input type="text" id="q1" placeholder="Antwort 1 eingeben...">
+    </div>
 
-  <button onclick="checkAnswers()">KOORDINATEN ENTSCHLÜSSELN</button>
+    <div class="question-box">
+      <p><strong>Protokoll 2:</strong><br>Ich drehe mich endlos im Kreis, während deine Hände mich formen. Was bin ich?</p>
+      <input type="text" id="q2" placeholder="Antwort 2 eingeben...">
+    </div>
 
-  <div id="result">
-    <h3>✅ ZUGRIFF GEWÄHRT ✅</h3>
-    <p>Unsere Ziel-Koordinaten:<br><strong>47.40269184321686, 8.591843770148895</strong></p>
-    <p>📍 <a href="https://www.google.com/maps?q=47.40269184321686,8.591843770148895" target="_blank">Hier auf Google Maps öffnen</a></p>
-    <p><em>Hinweis: Zieh dir etwas an, das schmutzig werden darf!</em></p>
+    <div class="question-box">
+      <p><strong>Protokoll 3:</strong><br>[Hier kannst du eine Insider-Frage über euch einfügen, z.B.: Was war das erste Getränk, das wir zusammen getrunken haben?]</p>
+      <input type="text" id="q3" placeholder="Antwort 3 eingeben...">
+    </div>
+
+    <button onclick="checkAnswers()">KOORDINATEN ENTSCHLÜSSELN</button>
+
+    <div id="result">
+      <h3>✅ ZUGRIFF GEWÄHRT ✅</h3>
+      <p>Unsere Ziel-Koordinaten:<br><strong>47.40269184321686, 8.591843770148895</strong></p>
+      <p>📍 <a href="https://www.google.com/maps?q=47.40269184321686,8.591843770148895" target="_blank">Hier auf Google Maps öffnen</a></p>
+      <p><em>Hinweis: Zieh dir etwas an, das schmutzig werden darf!</em></p>
+    </div>
   </div>
 
   <script>
+    // Funktion, um vom Startbildschirm zum Rätsel zu wechseln
+    function startMission() {
+      document.getElementById('welcome-screen').style.display = 'none';
+      document.getElementById('riddle-screen').style.display = 'block';
+    }
+
+    // Funktion, um die Antworten zu prüfen
     function checkAnswers() {
-      // Eingaben auslesen, in Kleinbuchstaben umwandeln und Leerzeichen entfernen
       const a1 = document.getElementById('q1').value.toLowerCase().trim();
       const a2 = document.getElementById('q2').value.toLowerCase().trim();
       const a3 = document.getElementById('q3').value.toLowerCase().trim();
 
-      // Logik für die Antworten
       const isA1Correct = a1.includes('ton') || a1.includes('lehm');
       const isA2Correct = a2.includes('scheibe') || a2.includes('töpfer');
       const isA3Correct = a3.includes('kaffee'); // PASSE DIESES WORT AN DEINE FRAGE 3 AN!
 
       if (isA1Correct && isA2Correct && isA3Correct) {
-        // Wenn alles stimmt, zeige das Ergebnis
         document.getElementById('result').style.display = 'block';
         window.scrollTo(0, document.body.scrollHeight);
       } else {
-        // Wenn etwas falsch ist
-        alert('Zugriff verweigert. Ein oder mehrere Sicherheitsprotokolle sind inkorrekt. Versuch es nochmal! 🕵️‍♀️');
+        alert('Zugriff verweigert. Ein oder mehrere Antworten sind inkorrekt. Versuch es nochmal! 🕵️‍♀️');
       }
     }
   </script>
