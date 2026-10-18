@@ -18,7 +18,7 @@
       background-color: #282a36; 
       color: #50fa7b; 
       text-align: center; 
-      padding: 20px; /* Etwas weniger Padding für mobile Bildschirme */
+      padding: 20px; 
       display: flex;
       justify-content: center;
       align-items: center;
@@ -36,15 +36,43 @@
       margin-bottom: 20px;
       font-size: 1.8em;
     }
+
+    h2 {
+      color: #bd93f9;
+      margin-top: 25px;
+      margin-bottom: 15px;
+      font-size: 1.4em;
+      border-bottom: 1px solid #6272a4;
+      padding-bottom: 5px;
+    }
+
+    h3 {
+      color: #8be9fd;
+      margin-top: 15px;
+      margin-bottom: 10px;
+      font-size: 1.1em;
+    }
     
-    p { 
+    p, li { 
       line-height: 1.6; 
       font-size: 16px; 
       margin-bottom: 15px;
       color: #f8f8f2;
     }
+
+    ul, ol {
+      text-align: left;
+      margin-left: 20px;
+      margin-bottom: 15px;
+      color: #f8f8f2;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
     
-    #welcome-screen, #riddle-screen {
+    /* Bildschirme */
+    #welcome-screen, #riddle-screen, #pottery-screen {
       background: #44475a;
       padding: 30px 20px;
       border-radius: 12px;
@@ -52,8 +80,13 @@
       box-shadow: 0 10px 25px rgba(0,0,0,0.5);
     }
     
-    #riddle-screen {
+    #riddle-screen, #pottery-screen {
       display: none;
+    }
+
+    /* Das Töpfer-1x1 soll linksbündig sein für bessere Lesbarkeit */
+    #pottery-screen {
+      text-align: left;
     }
 
     .question-box {
@@ -120,6 +153,15 @@
       transform: translateY(1px);
     }
 
+    /* Spezieller Button-Style für die Tutorials */
+    .tutorial-btn {
+      background: #50fa7b;
+      margin-top: 15px;
+    }
+    .tutorial-btn:hover {
+      background: #8be9fd;
+    }
+
     #result { 
       margin-top: 30px; 
       font-size: 1.1em; 
@@ -136,6 +178,11 @@
       margin-bottom: 10px;
     }
 
+    .success-btn {
+      background: #ff79c6;
+      margin-top: 20px;
+    }
+
     a { 
       color: #282a36; 
       font-weight: bold; 
@@ -149,7 +196,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Die schwebende Rakete */
     @keyframes float {
       0% { transform: translateY(0px); }
       50% { transform: translateY(-4px); }
@@ -163,7 +209,6 @@
       font-size: 1.2em;
     }
 
-    /* Der Startflug der Rakete */
     .rocket-launch {
       animation: blastoff 0.8s cubic-bezier(0.4, 0, 0.2, 1) forwards;
     }
@@ -180,19 +225,19 @@
   <div class="container">
     <!-- STARTBILDSCHIRM -->
     <div id="welcome-screen">
-      <h1>Hoi! 👋</h1>
-      <p>Willkomme uf dim gwunnene Überraschigs-Date.</p>
-      <p>Du hesch der ja öppis gwünscht, wo mer beid na nie gmacht hend. Wo und was das wird si, wirsch na usefinde.</p>
-      <p>Erst mal musch der das aber verdiene und euses Date unlocke (cha ja au nöd alles selber mache 😉).</p>
-      <p>Viel Erfolg!</p>
+      <h1 style="text-align: center;">Hoi! 👋</h1>
+      <p style="text-align: center;">Willkomme uf dim gwunnene Überraschigs-Date.</p>
+      <p style="text-align: center;">Du hesch der ja öppis gwünscht, wo mer beid na nie gmacht hend. Wo und was das wird si, wirsch na usefinde.</p>
+      <p style="text-align: center;">Erst mal musch der das aber verdiene und euses Date unlocke (cha ja au nöd alles selber mache 😉).</p>
+      <p style="text-align: center;">Viel Erfolg!</p>
       <button onclick="startMission()">Rätsel starte <span class="rocket" id="rocket-icon">🚀</span></button>
     </div>
 
     <!-- RÄTSELBILDSCHIRM -->
     <div id="riddle-screen">
-      <h1> DATE UNLOCKER 🔒</h1>
-      <p>Will du mich letschti mit dine Matheprüefigsufgabe ufd Prob gstellt hesch (& und ich kläglich gscheiteret bi), chasch dich da jetzt mal selber unter Bewis stelle.</p>
-      <p>Erst wennd alli Ufgabe richtig glöst hesch, bechunnsch de Hiwis zu eusem Date.</p>
+      <h1 style="text-align: center;">🔒 DATE UNLOCKER 🔒</h1>
+      <p style="text-align: center;">Will du mich letschti mit dine Matheprüefigsufgabe ufd Prob gstellt hesch (& und ich kläglich gscheiteret bi), chasch dich da jetzt mal selber unter Bewis stelle.</p>
+      <p style="text-align: center;">Erst wennd alli Ufgabe richtig glöst hesch, bechunnsch de Hiwis zu eusem Date.</p>
 
       <div class="question-box">
         <p><strong>Frag 1:</strong><br>Bei Familie Monster hat jedes Monster entweder 1 Auge und 4 Beine oder 3 Augen und 2 Beine. Alle zusammen haben 9 Augen und 16 Beine. Wie viele Monster gehören zu der Familie?</p>
@@ -212,25 +257,66 @@
       <button onclick="checkAnswers()">KOORDINATEN ENTSCHLÜSSELN</button>
 
       <div id="result">
-        <h3>✅ ZUEGRIFF GWÄHRT</h3>
-        <p>Eusi Ziel-Koordinate:<br><strong>47.4026918, 8.5918437</strong></p>
-        <p>📍 <a href="https://www.google.com/maps?q=47.40269184321686,8.591843770148895" target="_blank">Hier auf Google Maps öffnen</a></p>
+        <h3 style="text-align: center;">✅ ZUEGRIFF GWÄHRT</h3>
+        <p style="text-align: center;">Eusi Ziel-Koordinate:<br><strong>47.4026918, 8.5918437</strong></p>
+        <p style="text-align: center;">📍 <a href="https://www.google.com/maps?q=47.40269184321686,8.591843770148895" target="_blank">Hier auf Google Maps öffnen</a></p>
+        
+        <!-- NEUER BUTTON -->
+        <button class="success-btn" onclick="showPotteryGuide()">Ich bin am richtigen Ort 📍</button>
       </div>
+    </div>
+
+    <!-- TÖPFER-GUIDE BILDSCHIRM -->
+    <div id="pottery-screen">
+      <h1 style="text-align: center;">🏺 Töpfer 1x1 🏺</h1>
+      <p style="text-align: center;">Herzlich willkommen im GZ Hirzenbach! Wir machen uns heute die Hände schmutzig. Hier sind die Basics:</p>
+
+      <h2>1. Die drei wichtigsten Grundtechniken</h2>
+      <p>Ohne Scheibe formst du den Ton komplett mit den Händen und einfachen Hilfsmitteln. Es gibt drei klassische Methoden:</p>
+      <ul>
+        <li><strong>Daumendrucktechnik (Pinch-Technik):</strong> Du formst aus dem Ton eine Kugel, drückst den Daumen in die Mitte und „pingst“ (drückst) den Ton von unten nach oben gleichmäßig dünn. Perfekt für kleine Schälchen, Becher oder Salzstreuer.</li>
+        <li><strong>Wulsttechnik (Coiling):</strong> Du rollst den Ton zu gleichmäßigen Schlangen (Wülsten) und setzt diese Schicht für Schicht aufeinander. Die Übergänge werden innen und außen glattgestrichen. Ideal für Vasen, größere Töpfe oder organische Formen.</li>
+        <li><strong>Plattentechnik (Slab-Building):</strong> Du rollst den Ton mit einem Nudelholz gleichmäßig flach aus (wie Keksteig). Aus diesen Platten schneidest du Teile aus. Du kannst sie flach zusammensetzen (z.B. für eckige Boxen) oder über bestehende Formen wie Schüsseln oder Gipsformen legen. Ideal für Teller, eckige Gefäße oder gemusterte Fliesen.</li>
+      </ul>
+
+      <h2>2. Das goldene Gesetz: Richtig Verbinden</h2>
+      <p>Die häufigste Fehlerquelle für Anfänger ist, dass angesetzte Teile (wie Henkel oder Füße) beim Trocknen oder Brennen abfallen. Merk dir dafür das Prinzip <em>Anrauen & Schlickern</em>:</p>
+      <ol>
+        <li><strong>Anrauen:</strong> Kratze beide Kontaktflächen mit einer Gabel, einer Nadel oder einem Drahtpinsel kreuzweise an.</li>
+        <li><strong>Schlicker auftragen:</strong> Schlicker ist dein „Ton-Kleber“. Du stellst ihn einfach her, indem du getrocknete Tonreste mit etwas Wasser zu einem cremigen Brei verrührst. Bestreiche beide angerauten Stellen damit.</li>
+        <li><strong>Fügen & Verstreichen:</strong> Drücke die Teile fest zusammen, sodass der Schlicker an den Seiten leicht herausquillt (das zeigt, dass keine Luftblasen eingeschlossen sind). Verstreiche den Übergang anschließend sauber mit den Fingern oder einem Werkzeug.</li>
+      </ol>
+
+      <h2>3. Der Weg zum fertigen Stück</h2>
+      <ol>
+        <li><strong>Formen:</strong> Setze deine Idee mit einer der Techniken um. Vermeide dabei extrem dicke Wände (ideal sind 5–8 mm), da dicke Stellen schlecht trocknen und im Ofen reißen können.</li>
+        <li><strong>Langsames Trocknen:</strong> Lass dein fertiges Stück extrem langsam trocknen.</li>
+        <li><strong>Schrühbrand (1. Brand):</strong> Wenn das Stück komplett trocken ist („lederhart“ bis „knochentrocken“), geht es zum ersten Mal in den Töpferofen (meist bei ca. 900–1000 °C).</li>
+        <li><strong>Glasieren & Glattbrand (2. Brand):</strong> Nach dem ersten Brand wird die flüssige Glasur aufgetragen. Danach folgt der finale Brand (je nach Tonart zwischen 1050 und 1250 °C), wodurch die Oberfläche versiegelt und wasserdicht wird.</li>
+      </ol>
+
+      <h2 style="text-align: center; margin-top: 40px;">Was möchtest du heute machen?</h2>
+      <p style="text-align: center;">Wähle dein Projekt, um ein kurzes Tutorial-Video zu sehen:</p>
+
+      <!-- HIER KOMMEN SPÄTER DIE YOUTUBE LINKS REIN -->
+      <button class="tutorial-btn" onclick="window.open('HIER_DEIN_YOUTUBE_LINK_FÜR_SCHÜSSEL_EINTRAGEN', '_blank')">🥣 Eine Schüssel töpfern</button>
+      
+      <button class="tutorial-btn" onclick="window.open('HIER_DEIN_YOUTUBE_LINK_FÜR_TASSE_EINTRAGEN', '_blank')">☕ Eine Tasse töpfern</button>
+      
+      <button class="tutorial-btn" onclick="window.open('HIER_DEIN_YOUTUBE_LINK_FÜR_TELLER_EINTRAGEN', '_blank')">🍽️ Einen Teller töpfern</button>
+
     </div>
   </div>
 
   <script>
-    // Funktion mit Raketen-Animation
     function startMission() {
       const rocket = document.getElementById('rocket-icon');
-      // Rakete starten lassen
       rocket.classList.add('rocket-launch');
       
-      // Warten, bis die Rakete weggeflogen ist (600 Millisekunden), dann Bildschirm wechseln
       setTimeout(() => {
         document.getElementById('welcome-screen').style.display = 'none';
         document.getElementById('riddle-screen').style.display = 'block';
-        window.scrollTo(0, 0); // Nach oben scrollen
+        window.scrollTo(0, 0); 
       }, 600);
     }
 
@@ -239,20 +325,25 @@
       const a2 = document.getElementById('q2').value.toLowerCase().trim();
       const a3 = document.getElementById('q3').value.toLowerCase().trim();
 
-      // WICHTIGER FIX: Suchbegriffe müssen in Anführungszeichen stehen ('5' statt 5)
       const isA1Correct = a1.includes('5');
       const isA2Correct = a2.includes('180');
       const isA3Correct = a3.includes('3'); 
 
       if (isA1Correct && isA2Correct && isA3Correct) {
         document.getElementById('result').style.display = 'block';
-        // Smooth scroll zum Ergebnis
         setTimeout(() => {
           document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
         }, 100);
       } else {
         alert('Zugriff verweigeret. Ei oder mehreri Antworte sind falsch. Versuchs nomal! 🕵️‍♀️');
       }
+    }
+
+    // NEUE FUNKTION: Zeigt den Töpfer-Guide
+    function showPotteryGuide() {
+      document.getElementById('riddle-screen').style.display = 'none';
+      document.getElementById('pottery-screen').style.display = 'block';
+      window.scrollTo(0, 0); // Scrollt wieder ganz nach oben
     }
   </script>
 
