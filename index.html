@@ -78,29 +78,29 @@
   <!-- STARTBILSCHIRM -->
   <div id="welcome-screen">
     <h1>Hoi! 👋</h1>
-    <p>willkomme uf dim überraschigs-date.</p>
-    <p>du hesch der ja öppis gwünscht wo mer beid na nie gmacht hend. was das wird si musch du aber zerscht usefinde und eus denn det herefüehre.</p>
-    <p>viel erfolg!</p>
+    <p>Willkomme uf dim Überraschigs-date.</p>
+    <p>Du hesch der ja öppis gwünscht wo mer beid na nie gmacht hend. Wo das wird si musch du aber zerscht usefinde (vo nüt chunnt nüt) und eus denn det herefüehre.</p>
+    <p>Viel Erfolg bim Date unlocke!</p>
     <button onclick="startMission()">Rätsel starten 🚀</button>
   </div>
 
   <!-- RÄTSELBILDSCHIRM -->
   <div id="riddle-screen">
     <h1>🔒 DATE_UNLOCKER_V1.0 🔒</h1>
-    <p>System gesperrt. Bitte löse die Sicherheitsprotokolle, um die Zielkoordinaten für unser Date zu extrahieren.</p>
+    <p>Will du mich letschti mit dine Matheprüefigsufgabe ufd Prob gstellt hesch (& und ich kläglich gscheiteret bi), chasch dich da jetzt mal selber unter Bewis stelle. Erst wennd alli Ufgabe richtig glöst hesch, bechunnsch de Hiwis zu eusem Date.</p>
 
     <div class="question-box">
-      <p><strong>Protokoll 1:</strong><br>Ich bestehe aus Erde und Wasser, aber erst das Feuer macht mich hart. Was bin ich?</p>
+      <p><strong>Frage 1:</strong><br>Bei Familie Monster hat jedes Monster entweder 1 Auge und 4 Beine oder 3 Augen und 2 Beine. Alle zusammen haben 9 Augen und 16 Beine. Wie viele Monster gehoren zu der Familie?</p>
       <input type="text" id="q1" placeholder="Antwort 1 eingeben...">
     </div>
 
     <div class="question-box">
-      <p><strong>Protokoll 2:</strong><br>Ich drehe mich endlos im Kreis, während deine Hände mich formen. Was bin ich?</p>
+      <p><strong>Frage 2:</strong><br>Eine Gruppe Fensterputzer putzt alle Fenster eines Bürogebäudes. Jeder putzt gleich viele Fenster. Hätte das Gebäude 80 Fenster mehr, müsste jeder 4 Fenster mehr putzen. Wären es 8 Fensterputzer weniger, müsste jeder 6 Fenster mehr putzen. Wie viele Fenster hat das Gebäude? </p>
       <input type="text" id="q2" placeholder="Antwort 2 eingeben...">
     </div>
 
     <div class="question-box">
-      <p><strong>Protokoll 3:</strong><br>[Hier kannst du eine Insider-Frage über euch einfügen, z.B.: Was war das erste Getränk, das wir zusammen getrunken haben?]</p>
+      <p><strong>Frage 3:</strong><br>Speizal-Aufgabe: Anni git dir d Lösig wenn du die Ufgab schaffsch.</p>
       <input type="text" id="q3" placeholder="Antwort 3 eingeben...">
     </div>
 
@@ -110,7 +110,6 @@
       <h3>✅ ZUGRIFF GEWÄHRT ✅</h3>
       <p>Unsere Ziel-Koordinaten:<br><strong>47.40269184321686, 8.591843770148895</strong></p>
       <p>📍 <a href="https://www.google.com/maps?q=47.40269184321686,8.591843770148895" target="_blank">Hier auf Google Maps öffnen</a></p>
-      <p><em>Hinweis: Zieh dir etwas an, das schmutzig werden darf!</em></p>
     </div>
   </div>
 
@@ -127,9 +126,9 @@
       const a2 = document.getElementById('q2').value.toLowerCase().trim();
       const a3 = document.getElementById('q3').value.toLowerCase().trim();
 
-      const isA1Correct = a1.includes('ton') || a1.includes('lehm');
-      const isA2Correct = a2.includes('scheibe') || a2.includes('töpfer');
-      const isA3Correct = a3.includes('kaffee'); // PASSE DIESES WORT AN DEINE FRAGE 3 AN!
+      const isA1Correct = a1.includes(5);
+      const isA2Correct = a2.includes(180);
+      const isA3Correct = a3.includes(3); 
 
       if (isA1Correct && isA2Correct && isA3Correct) {
         document.getElementById('result').style.display = 'block';
