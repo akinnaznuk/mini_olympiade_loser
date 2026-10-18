@@ -5,17 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Geheime Mission</title>
   <style>
-    /* CSS Variablen für die neue Farbpalette */
+    /* CSS Variablen für eine sanfte, moderne Farbpalette (nicht knallig) */
     :root {
-      --color-sand: #F2EBE3;
-      --color-cashmere: #EAE0D5;
-      --color-greige: #BDB4AB;
-      --color-salbeigruen: #96A88C;
-      --color-salbeigruen-hover: #7F9176;
-      --color-terrakotta: #C27361;
-      --color-terrakotta-hover: #AA6150;
-      --color-text: #5C5249; /* Ein weiches, dunkles Erd-Braun für gute Lesbarkeit */
-      --color-light: #F9F6F0; /* Sehr helles Sand für Eingabefelder */
+      --color-sand: #F4EFEB;
+      --color-cashmere: #E8DFD8;
+      --color-greige: #B8B0A6;
+      --color-salbeigruen: #A2AF9A; /* Sanfteres Grün */
+      --color-salbeigruen-hover: #8F9D87;
+      --color-terrakotta: #C48A7D; /* Weicheres, pastelliges Terrakotta */
+      --color-terrakotta-hover: #B0796C;
+      --color-text: #5A534E; /* Ein weiches, dunkles Erd-Braun */
+      --color-light: #FBF9F7;
     }
 
     * {
@@ -81,16 +81,16 @@
       margin-bottom: 10px;
     }
     
-    /* Bildschirme (Cashmere Hintergrund) */
-    #welcome-screen, #riddle-screen, #pottery-screen {
+    /* Bildschirme */
+    #welcome-screen, #riddle-screen, #location-screen, #pottery-screen {
       background: var(--color-cashmere);
       padding: 30px 25px;
       border-radius: 16px;
       border: 1px solid var(--color-greige);
-      box-shadow: 0 10px 30px rgba(92, 82, 73, 0.1);
+      box-shadow: 0 10px 30px rgba(90, 83, 78, 0.08);
     }
     
-    #riddle-screen, #pottery-screen {
+    #riddle-screen, #location-screen, #pottery-screen {
       display: none;
     }
 
@@ -134,10 +134,10 @@
     input:focus {
       outline: none;
       border-color: var(--color-salbeigruen);
-      box-shadow: 0 0 8px rgba(150, 168, 140, 0.4);
+      box-shadow: 0 0 8px rgba(162, 175, 154, 0.4);
     }
 
-    /* Standard-Button (Salbeigrün) */
+    /* Standard-Button */
     button { 
       padding: 15px 30px; 
       background: var(--color-salbeigruen); 
@@ -150,7 +150,7 @@
       margin-top: 10px;
       width: 100%;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 10px rgba(150, 168, 140, 0.3);
+      box-shadow: 0 4px 10px rgba(162, 175, 154, 0.3);
       position: relative;
       overflow: hidden;
       letter-spacing: 0.5px;
@@ -159,35 +159,37 @@
     button:hover { 
       background: var(--color-salbeigruen-hover); 
       transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(150, 168, 140, 0.4);
+      box-shadow: 0 6px 15px rgba(162, 175, 154, 0.4);
     }
 
     button:active {
       transform: translateY(1px);
     }
 
-    /* Erfolgs-Button (Terrakotta) */
+    /* Terrakotta-Button (für Weiter / Ort bestätigt) */
     .success-btn {
       background: var(--color-terrakotta);
-      box-shadow: 0 4px 10px rgba(194, 115, 97, 0.3);
+      box-shadow: 0 4px 10px rgba(196, 138, 125, 0.3);
       margin-top: 20px;
     }
     .success-btn:hover {
       background: var(--color-terrakotta-hover);
-      box-shadow: 0 6px 15px rgba(194, 115, 97, 0.4);
+      box-shadow: 0 6px 15px rgba(196, 138, 125, 0.4);
     }
 
-    /* Tutorial-Buttons (Greige) */
+    /* Tutorial-Buttons (Emoji Auswahl) */
     .tutorial-btn {
       background: var(--color-greige);
       box-shadow: none;
       margin-top: 15px;
+      font-size: 24px; /* Größere Emojis */
+      padding: 10px;
     }
     .tutorial-btn:hover {
-      background: #A39990;
+      background: #A69E93;
     }
 
-    /* Resultat-Box */
+    /* Resultat-Box (Koordinaten) */
     #result { 
       margin-top: 30px; 
       font-size: 1.1em; 
@@ -207,7 +209,7 @@
       color: var(--color-terrakotta); 
       font-weight: bold; 
       text-decoration: none; 
-      border-bottom: 2px solid rgba(194, 115, 97, 0.4); 
+      border-bottom: 2px solid rgba(196, 138, 125, 0.4); 
       transition: all 0.3s ease;
     }
 
@@ -286,8 +288,16 @@
         <p style="text-align: center;">Eusi Ziel-Koordinate:<br><strong>47.4026918, 8.5918437</strong></p>
         <p style="text-align: center;">📍 <a href="https://www.google.com/maps?q=47.40269184321686,8.591843770148895" target="_blank">Hier auf Google Maps öffnen</a></p>
         
-        <button class="success-btn" onclick="showPotteryGuide()">Mir sind am richtigen Ort 📍</button>
+        <!-- Nur ein Pfeil, damit man nicht aus Versehen spoilert -->
+        <button class="success-btn" onclick="showLocationScreen()">Weiter ➔</button>
       </div>
+    </div>
+
+    <!-- ZWISCHENBILDSCHIRM (Ort bestätigen) -->
+    <div id="location-screen">
+      <h1 style="text-align: center;">Bisch scho det? 🗺️</h1>
+      <p style="text-align: center;">Wenn ihr a de Zielkoordinate aacho sind, dörfsch uf de Button klicke.</p>
+      <button class="success-btn" onclick="showPotteryGuide()">Mir sind am richtige Ort 📍</button>
     </div>
 
     <!-- TÖPFER-GUIDE BILDSCHIRM -->
@@ -362,8 +372,16 @@
       }
     }
 
-    function showPotteryGuide() {
+    // Zeigt den Warte-Screen mit der Abfrage nach dem Ort
+    function showLocationScreen() {
       document.getElementById('riddle-screen').style.display = 'none';
+      document.getElementById('location-screen').style.display = 'block';
+      window.scrollTo(0, 0); 
+    }
+
+    // Zeigt den finalen Töpfer-Guide
+    function showPotteryGuide() {
+      document.getElementById('location-screen').style.display = 'none';
       document.getElementById('pottery-screen').style.display = 'block';
       window.scrollTo(0, 0); 
     }
